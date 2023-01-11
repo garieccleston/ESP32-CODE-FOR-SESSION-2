@@ -45,7 +45,7 @@ void loop() {
       drivingMovement(255, 255, 0);
       MPU ();
       ultrasonicSensor ();
-      temp = breakLoop(mpu6050.getAngleZ());
+      temp = turn_180(mpu6050.getAngleZ());
       break;   
     }
   }
@@ -59,7 +59,7 @@ void loop() {
     while (sonar.ping_cm() < 10 && sonar.ping_cm() != 0)
     {
     drivingMovement(0, 0, 90);
-    temp = loop (sonar.ping_cm());
+    temp = reverseDistance_10 (sonar.ping_cm());
     }   
   }
   
@@ -72,7 +72,7 @@ void loop() {
       drivingMovement(255, 255, 160);
       MPU ();
       ultrasonicSensor ();
-      temp = breakLoop2 (mpu6050.getAngleZ());
+      temp = turn_90 (mpu6050.getAngleZ());
       break; 
     }
   }
@@ -86,7 +86,7 @@ void loop() {
     while (sonar.ping_cm() < 10 && sonar.ping_cm() != 0)
     {
     drivingMovement(0, 0, 90);
-    temp = loop2 (sonar.ping_cm());
+    temp = stopDistance_10 (sonar.ping_cm());
     }
   }
 
@@ -126,7 +126,7 @@ void drivingMovement (int leftMotor_speed, int rightMotor_speed, int steeringAng
   Wire.endTransmission(); // stop transmitting 
 }
 
-int breakLoop (float angle)
+int turn_180 (float angle)
 {
   while (angle > 170 && angle < 210)
   {
@@ -135,7 +135,7 @@ int breakLoop (float angle)
   return 0;
 }
 
-int loop (float distance)
+int reverseDistance_10 (float distance)
 {
   while (distance < 10)
   {
@@ -144,7 +144,7 @@ int loop (float distance)
   return 1;
 }
 
-int breakLoop2 (float angle2)
+int turn_90 (float angle2)
 {
   while (angle2 > 80 && angle2 < 120)
   {
@@ -153,7 +153,7 @@ int breakLoop2 (float angle2)
   return 2;
 }
 
-int loop2 (float distance2)
+int stopDistance_10 (float distance2)
 {
   while (distance2 < 10)
   {
